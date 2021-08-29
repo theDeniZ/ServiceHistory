@@ -1,10 +1,10 @@
 import { combineReducers, Reducer } from "redux";
-import ServiceHistoryReducer, { ServiceHistoryReducerStore } from "./ServiceReducer";
+import ServicesReducer, { ServicesReducerStore } from "./ServiceReducer";
 
 export interface ApplicationStore {
-    serviceHistoryReducer: ServiceHistoryReducerStore;
+    servicesReducer: ServicesReducerStore;
 }
 
 export const reducers = (): Reducer<ApplicationStore> => combineReducers<ApplicationStore>({
-    serviceHistoryReducer: ServiceHistoryReducer
+    servicesReducer: ServicesReducer,
 });
