@@ -67,6 +67,19 @@ export const updateServiceDealerAtIndexThunk = (index: number, newValue: string)
     dispatch(updateServiceAtIndexThunk(newService, index));
 };
 
+export const updateServiceBMWAtIndexThunk = (index: number, newValue: boolean) => (dispatch: ThunkDispatch<ApplicationStore, null, AnyAction>, getState: () => ApplicationStore) => {
+    const oldService = getState().servicesReducer.services[index];
+    if (!oldService) {
+        return
+    }
+    const newService: Service = {
+        ...oldService,
+        bmw: newValue,
+    };
+    dispatch(updateServiceAtIndexThunk(newService, index));
+};
+
+
 // Swap
 const swapArrayItemsAt = (array: Object[], i: number, j: number) => {
     var b = array[i];

@@ -4,6 +4,7 @@ import Service from "../../../model/Service";
 import DateInput from "../../shared/DateInput";
 import TextInput from "../../shared/TextInput";
 import ServiceListItemActions from "./ServiceListItemActions";
+import CheckboxInput from "../../shared/CheckboxInput";
 
 export interface ServiceListItemProps {
     currentIndex: number,
@@ -13,6 +14,7 @@ export interface ServiceListItemProps {
     onServiceDateUpdatedAction: (index: number, newValue: Date) => void,
     onServiceMileageUpdatedAction: (index: number, newValue: string) => void,
     onServiceDealerUpdatedAction: (index: number, newValue: string) => void,
+    onServiceBMWUpdatedAction: (index: number, newValue: boolean) => void,
     onServiceMoveUpAction: (index: number) => void,
     onServiceMoveDownAction: (index: number) => void,
 };
@@ -39,7 +41,8 @@ const ServiceListItem: FC<ServiceListItemProps> = (props: ServiceListItemProps) 
         currentIndex, 
         onServiceDateUpdatedAction, 
         onServiceMileageUpdatedAction, 
-        onServiceDealerUpdatedAction 
+        onServiceDealerUpdatedAction,
+        onServiceBMWUpdatedAction
     } = props;
 
     const classes = useStyles();
@@ -56,11 +59,16 @@ const ServiceListItem: FC<ServiceListItemProps> = (props: ServiceListItemProps) 
         onServiceDealerUpdatedAction(currentIndex, dealer);
     };
 
+    const onBMWUpdateAction = (bmw: boolean) => {
+        onServiceBMWUpdatedAction(currentIndex, bmw);
+    };
+
     return (
         <div className={classes.container}>
             <DateInput className={classes.margin} value={service.date} onChange={onDateUpdateAction}>Date of service</DateInput>
             <TextInput className={classes.margin} value={service.mileage} onChange={onMileageUpdateAction}>Mileage</TextInput>
             <TextInput className={classes.margin} value={service.dealer} onChange={onDealerUpdateAction}>Dealer</TextInput>
+            <CheckboxInput className={classes.margin} value={service.bmw} onChange={onBMWUpdateAction}>BMW</CheckboxInput>
             <ServiceListItemActions className={classes.actions} {...props} />
         </div>
     );

@@ -12,6 +12,7 @@ export interface ServiceListProps {
     onServiceDateUpdatedAction: (index: number, newValue: Date) => void,
     onServiceMileageUpdatedAction: (index: number, newValue: string) => void,
     onServiceDealerUpdatedAction: (index: number, newValue: string) => void,
+    onServiceBMWUpdatedAction: (index: number, newValue: boolean) => void,
     onServiceMoveUpAction: (index: number) => void,
     onServiceMoveDownAction: (index: number) => void,
 };

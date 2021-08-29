@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { ApplicationStore } from "../../../redux/reducers";
-import { deleteServiceAtIndexThunk, moveServiceDownwardsAtIndexThunk, moveServiceUpwardsAtIndexThunk, updateServiceDateAtIndexThunk, updateServiceDealerAtIndexThunk, updateServiceMileageAtIndexThunk } from "../../../redux/thunks/ServiceThunk";
+import { deleteServiceAtIndexThunk, moveServiceDownwardsAtIndexThunk, moveServiceUpwardsAtIndexThunk, updateServiceBMWAtIndexThunk, updateServiceDateAtIndexThunk, updateServiceDealerAtIndexThunk, updateServiceMileageAtIndexThunk } from "../../../redux/thunks/ServiceThunk";
 import ServiceList from "./ServiceList";
 
 
@@ -25,6 +25,10 @@ const ServiceListContainer: FC = () => {
         dispatch(updateServiceDealerAtIndexThunk(index, newValue));
     };
 
+    const onServiceBMWUpdatedAction = (index: number, newValue: boolean) => {
+        dispatch(updateServiceBMWAtIndexThunk(index, newValue));
+    };
+
     const onServiceMoveUpAction = (index: number) => {
         dispatch(moveServiceUpwardsAtIndexThunk(index));
     };
@@ -43,6 +47,7 @@ const ServiceListContainer: FC = () => {
                 onServiceMileageUpdatedAction={onServiceMileageUpdatedAction}
                 onServiceMoveUpAction={onServiceMoveUpAction}
                 onServiceMoveDownAction={onServiceMoveDownAction}
+                onServiceBMWUpdatedAction={onServiceBMWUpdatedAction}
             />
         </>
      );

@@ -14,6 +14,6 @@ export const createServiceObject = (): Service => ({
     mileage: 0,
     dealer: "",
     bmw: false,
-    status: "",
+    status: "1",
     items: [],
 });
