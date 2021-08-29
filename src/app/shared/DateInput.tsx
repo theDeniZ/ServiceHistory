@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 
 export interface DateInputProps {
-    label: string,
     value: Date,
     onChange: (value: Date) => void,
+    className?: string,
 }
  
-const DateInput: React.FC<DateInputProps> = (props) => {
-    const { label, value, onChange } = props;
+const DateInput: React.FC<PropsWithChildren<DateInputProps>> = (props) => {
+    const { value, onChange, className } = props;
 
     const handleDateChange = (date: Date | null) => {
         onChange(date || value);
@@ -23,12 +23,13 @@ const DateInput: React.FC<DateInputProps> = (props) => {
                 variant="inline"
                 format="dd.MM.yyyy"
                 margin="normal"
-                label={label}
+                label={props.children}
                 value={value}
                 onChange={handleDateChange}
                 KeyboardButtonProps={{
                     'aria-label': 'change date',
                 }}
+                className={className}
             />
         </MuiPickersUtilsProvider>
         </>
