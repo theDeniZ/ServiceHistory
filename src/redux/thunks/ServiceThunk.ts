@@ -1,6 +1,7 @@
 import { AnyAction } from "redux"
 import { ThunkDispatch } from "redux-thunk"
 import Service, { createServiceObject } from "../../model/Service";
+import ServiceItem from "../../model/ServiceItem";
 import { ServicesAvailableAction } from "../actions/ServiceAction";
 import { ApplicationStore } from "../reducers"
 
@@ -79,6 +80,17 @@ export const updateServiceBMWAtIndexThunk = (index: number, newValue: boolean) =
     dispatch(updateServiceAtIndexThunk(newService, index));
 };
 
+export const updateServiceItemsAtIndexThunk = (index: number, newValue: ServiceItem[]) => (dispatch: ThunkDispatch<ApplicationStore, null, AnyAction>, getState: () => ApplicationStore) => {
+    const oldService = getState().servicesReducer.services[index];
+    if (!oldService) {
+        return
+    }
+    const newService: Service = {
+        ...oldService,
+        items: newValue,
+    };
+    dispatch(updateServiceAtIndexThunk(newService, index));
+};
 
 // Swap
 const swapArrayItemsAt = (array: Object[], i: number, j: number) => {

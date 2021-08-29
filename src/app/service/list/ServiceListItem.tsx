@@ -5,6 +5,9 @@ import DateInput from "../../shared/DateInput";
 import TextInput from "../../shared/TextInput";
 import ServiceListItemActions from "./ServiceListItemActions";
 import CheckboxInput from "../../shared/CheckboxInput";
+import ServiceItem from "../../../model/ServiceItem";
+import ServiceItems from "../serviceItems/ServiceItems";
+import { Grid } from "@material-ui/core";
 
 export interface ServiceListItemProps {
     currentIndex: number,
@@ -15,16 +18,14 @@ export interface ServiceListItemProps {
     onServiceMileageUpdatedAction: (index: number, newValue: string) => void,
     onServiceDealerUpdatedAction: (index: number, newValue: string) => void,
     onServiceBMWUpdatedAction: (index: number, newValue: boolean) => void,
+    onServiceItemsUpdatedAction: (index: number, newValue: ServiceItem[]) => void,
     onServiceMoveUpAction: (index: number) => void,
     onServiceMoveDownAction: (index: number) => void,
 };
 
 const useStyles = makeStyles((theme) => ({
-    container: {
-        width: '100%',
-        padding: theme.spacing(0.3),
-        display: 'flex',
-        alignItems: 'center',
+    root: {
+        flexGrow: 1,
         justifyContent: 'center',
     },
     margin: {
@@ -42,7 +43,8 @@ const ServiceListItem: FC<ServiceListItemProps> = (props: ServiceListItemProps) 
         onServiceDateUpdatedAction, 
         onServiceMileageUpdatedAction, 
         onServiceDealerUpdatedAction,
-        onServiceBMWUpdatedAction
+        onServiceBMWUpdatedAction,
+        onServiceItemsUpdatedAction,
     } = props;
 
     const classes = useStyles();
@@ -63,13 +65,24 @@ const ServiceListItem: FC<ServiceListItemProps> = (props: ServiceListItemProps) 
         onServiceBMWUpdatedAction(currentIndex, bmw);
     };
 
+    const onItemsUpdateAction = (items: ServiceItem[]) => {
+        onServiceItemsUpdatedAction(currentIndex, items);
+    };
+
     return (
-        <div className={classes.container}>
-            <DateInput className={classes.margin} value={service.date} onChange={onDateUpdateAction}>Date of service</DateInput>
-            <TextInput className={classes.margin} value={service.mileage} onChange={onMileageUpdateAction}>Mileage</TextInput>
-            <TextInput className={classes.margin} value={service.dealer} onChange={onDealerUpdateAction}>Dealer</TextInput>
-            <CheckboxInput className={classes.margin} value={service.bmw} onChange={onBMWUpdateAction}>BMW</CheckboxInput>
-            <ServiceListItemActions className={classes.actions} {...props} />
+        <div className={classes.root}>
+            <Grid container spacing={3}>
+                <Grid item xs={12}>
+                    <DateInput className={classes.margin} value={service.date} onChange={onDateUpdateAction}>Date of service</DateInput>
+                    <TextInput className={classes.margin} value={service.mileage} onChange={onMileageUpdateAction}>Mileage</TextInput>
+                    <TextInput className={classes.margin} value={service.dealer} onChange={onDealerUpdateAction}>Dealer</TextInput>
+                    <CheckboxInput className={classes.margin} value={service.bmw} onChange={onBMWUpdateAction}>BMW</CheckboxInput>
+                    <ServiceListItemActions className={classes.actions} {...props} />
+                </Grid>
+                <Grid item xs={12}>
+                    <ServiceItems serviceItems={service.items} onServiceItemsChanged={onItemsUpdateAction} />
+                </Grid>
+            </Grid>
         </div>
     );
 };

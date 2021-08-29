@@ -5,5 +5,5 @@ export default interface ServiceItem {
 
 export const createServiceItemObject = (): ServiceItem => ({
     status: "1",
-    serviceType: "",
+    serviceType: "1",
 });

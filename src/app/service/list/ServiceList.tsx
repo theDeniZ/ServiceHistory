@@ -5,6 +5,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ServiceListItem from "./ServiceListItem";
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
+import ServiceItem from "../../../model/ServiceItem";
 
 export interface ServiceListProps {
     services: Service[],
@@ -13,6 +14,7 @@ export interface ServiceListProps {
     onServiceMileageUpdatedAction: (index: number, newValue: string) => void,
     onServiceDealerUpdatedAction: (index: number, newValue: string) => void,
     onServiceBMWUpdatedAction: (index: number, newValue: boolean) => void,
+    onServiceItemsUpdatedAction: (index: number, newValue: ServiceItem[]) => void,
     onServiceMoveUpAction: (index: number) => void,
     onServiceMoveDownAction: (index: number) => void,
 };
