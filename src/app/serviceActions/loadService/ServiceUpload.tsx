@@ -4,7 +4,7 @@ import { ChangeEvent, useRef } from "react";
 export interface FileUploadProps {
     onServiceUploaded: (fileContent: string) => void;
 };
- 
+
 const ServiceUpload: React.FC<FileUploadProps> = (props) => {
     const { onServiceUploaded } = props;
     const inputEl = useRef(null);
