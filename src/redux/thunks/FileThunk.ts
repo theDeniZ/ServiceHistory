@@ -59,3 +59,38 @@ const getServiceItemsFromAnArray = (array: string[]): ServiceItem[] => {
     }
     return items;
 };
+
+export const saveToFileThunk = () => (dispatch: ThunkDispatch<ApplicationStore, null, AnyAction>, getState: () => ApplicationStore) => {
+    const services = getState().servicesReducer.services;
+    const fileContent = servicesToFileContent(services);
+    saveToFileAction("service.tst", fileContent);
+};
+
+const servicesToFileContent = (services: Service[], startingIndex: number = 1): string => {
+    return services.map((s, i) => serviceToString(s, i + startingIndex)).join("\n");
+};
+
+//3|g_mmi|steuern_servicehistory_add||18;1;2021;0;173890;0;00081;0x1;6;1;0x1;0;0;12;0x1;0;0;5;0x1;0;0;4;0x1;0;0;100;0x1;0;0;11;0x1;0;0
+const serviceToString = (service: Service, index: number): string => {
+    return "" + index + "|g_mmi|steuern_servicehistory_add||" + 
+    service.date.getDate() + ";" + (service.date.getMonth() + 1) + ";" + service.date.getFullYear() +
+    ";0;" + service.mileage + ";" + (service.bmw ? "1" : "0") + ";" + service.dealer + ";0x1;" +
+    serviceItemsToString(service.items);
+};
+
+const serviceItemsToString = (items: ServiceItem[]): string => {
+    return "" + items.length + ";" + items.map(item => "" + item.serviceType + ";" + item.status + ";0;0").join(";");
+}
+
+const saveToFileAction = (filename: string, text: string) => {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+  
+    element.style.display = 'none';
+    document.body.appendChild(element);
+  
+    element.click();
+  
+    document.body.removeChild(element);
+}
