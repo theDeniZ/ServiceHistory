@@ -4,6 +4,6 @@ export default interface ServiceItem {
 };
 
 export const createServiceItemObject = (): ServiceItem => ({
-    status: "1",
+    status: "0x1",
     serviceType: "1",
 });

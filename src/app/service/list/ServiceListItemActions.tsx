@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'inline-block',
     },
 }));
- 
+
 const ServiceListItemActions: React.FC<ServiceListItemActionsProps> = (props) => {
     const { className, totalCount, currentIndex } = props;
 
