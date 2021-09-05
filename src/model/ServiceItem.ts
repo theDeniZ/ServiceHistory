@@ -3,7 +3,7 @@ export default interface ServiceItem {
     serviceType: string;
 };
 
-export const createServiceItem = (): ServiceItem => ({
-    status: "1",
-    serviceType: "",
+export const createServiceItemObject = (): ServiceItem => ({
+    status: "0x1",
+    serviceType: "1",
 });
