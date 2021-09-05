@@ -12,6 +12,12 @@ export interface ServiceItemListItemProps {
 }
  
 const useStyles = makeStyles((theme) => ({
+    item: {
+        width: theme.spacing(32),
+    },
+    picker: {
+        width: theme.spacing(24),
+    },
     margin: {
       margin: theme.spacing(1),
     },
@@ -38,12 +44,19 @@ const ServiceItemListItem: React.FC<ServiceItemListItemProps> = (props) => {
     };
     
     return ( 
-        <>
-            <PickerInput value={serviceItem.serviceType} options={pickerOptions} onChange={onPickerChanged}>Service type</PickerInput>
+        <div className={classes.item}>
+            <PickerInput 
+                value={serviceItem.serviceType} 
+                options={pickerOptions} 
+                onChange={onPickerChanged}
+                className={classes.picker}
+            >
+                Service type
+            </PickerInput>
             <IconButton aria-label="delete" className={classes.margin} onClick={onDeleteAction}>
                 <DeleteIcon />
             </IconButton>
-        </>
+        </div>
      );
 }
  
