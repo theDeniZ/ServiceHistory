@@ -62,8 +62,12 @@ const getServiceItemsFromAnArray = (array: string[]): ServiceItem[] => {
 
 export const saveToFileThunk = () => (dispatch: ThunkDispatch<ApplicationStore, null, AnyAction>, getState: () => ApplicationStore) => {
     const services = getState().servicesReducer.services;
-    const fileContent = servicesToFileContent(services);
+    const fileContent = getClearServiceLine() + servicesToFileContent(services, 2);
     saveToFileAction("service.tst", fileContent);
+};
+
+const getClearServiceLine = (): string => {
+    return "1|g_mmi|steuern_servicehistory_erase\n";
 };
 
 const servicesToFileContent = (services: Service[], startingIndex: number = 1): string => {
