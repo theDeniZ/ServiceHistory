@@ -4,7 +4,6 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ServiceListItem from "./ServiceListItem";
 import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
 import ServiceItem from "../../../model/ServiceItem";
 
 export interface ServiceListProps {
@@ -24,9 +23,7 @@ const useStyles = makeStyles((theme) => ({
     item: {
         width: '100%',
         margin: 'auto',
-    },
-    darker: {
-        backgroundColor: '#ddd',
+        borderBottom: '1px solid #ddd',
     },
 }));
 
@@ -40,7 +37,7 @@ const ServiceList: FC<ServiceListProps> = (props: ServiceListProps) => {
         <List className={classes.container} component="nav" aria-label="main mailbox folders">
             {services && services.map((service, i) => {
                 return (
-                    <ListItem key={i} className={clsx(classes.item, i % 2 && classes.darker)}>
+                    <ListItem key={i} className={classes.item}>
                         <ServiceListItem 
                             service={service} 
                             currentIndex={i} 

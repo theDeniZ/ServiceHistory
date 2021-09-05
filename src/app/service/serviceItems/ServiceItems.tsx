@@ -1,7 +1,6 @@
 import { Button, List, ListItem } from "@material-ui/core";
 import ServiceItem, { createServiceItemObject } from "../../../model/ServiceItem";
 import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
 import ServiceItemListItem from "./ServiceItemListItem";
 import { ServiceType } from "../../../model/ServiceType";
 
@@ -11,16 +10,15 @@ export interface ServiceItemsProps {
 }
 
 const useStyles = makeStyles((theme) => ({
-    container: {},
+    container: {
+        maxHeight: theme.spacing(30),
+        overflow: 'auto',
+    },
     item: {
         width: '100%',
         margin: 'auto',
     },
-    darker: {
-        backgroundColor: '#ddd',
-    },
 }));
-
 
 const ServiceItems: React.FC<ServiceItemsProps> = (props) => {
     const { serviceItems, onServiceItemsChanged } = props;
@@ -49,7 +47,7 @@ const ServiceItems: React.FC<ServiceItemsProps> = (props) => {
             <List className={classes.container} component="nav" aria-label="main mailbox folders">
                 {serviceItems && serviceItems.map((serviceItem, i) => {
                     return (
-                        <ListItem key={i} className={clsx(classes.item, i % 2 && classes.darker)}>
+                        <ListItem key={i} className={classes.item}>
                             <ServiceItemListItem 
                                 serviceItem={serviceItem} 
                                 onServiceTypeChanged={(newType) => onTypeChangedAtIndexAction(newType, i)}
