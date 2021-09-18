@@ -21,7 +21,7 @@ export const parseServiceFromFileThunk = (serviceContent: string) => (dispatch: 
     dispatch(ServicesAvailableAction(services));
 };
 
-const getServiceFromALine = (line: string): Service | null => {
+export const getServiceFromALine = (line: string): Service | null => {
     const parts = line.split("|");
     if (parts.length <= 4) {
         return null;
@@ -40,7 +40,7 @@ const getServiceFromALine = (line: string): Service | null => {
     };
 };
 
-const getServiceItemsFromAnArray = (array: string[]): ServiceItem[] => {
+export const getServiceItemsFromAnArray = (array: string[]): ServiceItem[] => {
     if (!array.length) {
         return [];
     }
