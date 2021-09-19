@@ -19,5 +19,7 @@ plugins:
 rules: {
   'new-cap': 'off',
   'semi': 'off',
-  'max-len': ["error", { "code": 120 }]
+  'max-len': ["error", { "code": 120 }],
+  'react/react-in-jsx-scope': 'off',
+  'react/prop-types': 'off'
 }

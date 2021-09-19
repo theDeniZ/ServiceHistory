@@ -1,10 +1,10 @@
-import { FC } from "react";
-import Service from "../../../model/Service";
+import {FC} from 'react';
+import Service from '../../../model/Service';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ServiceListItem from "./ServiceListItem";
-import { makeStyles } from '@material-ui/core/styles';
-import ServiceItem from "../../../model/ServiceItem";
+import ServiceListItem from './ServiceListItem';
+import {makeStyles} from '@material-ui/core/styles';
+import ServiceItem from '../../../model/ServiceItem';
 
 export interface ServiceListProps {
     services: Service[],
@@ -19,36 +19,36 @@ export interface ServiceListProps {
 };
 
 const useStyles = makeStyles((theme) => ({
-    container: {},
-    item: {
-        width: '100%',
-        margin: 'auto',
-        borderBottom: '1px solid #ddd',
-    },
+  container: {},
+  item: {
+    width: '100%',
+    margin: 'auto',
+    borderBottom: '1px solid #ddd',
+  },
 }));
 
 
 const ServiceList: FC<ServiceListProps> = (props: ServiceListProps) => {
-    const { services } = props;
+  const {services} = props;
 
-    const classes = useStyles();
+  const classes = useStyles();
 
-    return (
-        <List className={classes.container} component="nav" aria-label="main mailbox folders">
-            {services && services.map((service, i) => {
-                return (
-                    <ListItem key={i} className={classes.item}>
-                        <ServiceListItem 
-                            service={service} 
-                            currentIndex={i} 
-                            totalCount={services.length} 
-                            {...props}
-                        />
-                    </ListItem>
-                )
-            })}
-        </List>
-    )
+  return (
+    <List className={classes.container} component="nav" aria-label="main mailbox folders">
+      {services && services.map((service, i) => {
+        return (
+          <ListItem key={i} className={classes.item}>
+            <ServiceListItem
+              service={service}
+              currentIndex={i}
+              totalCount={services.length}
+              {...props}
+            />
+          </ListItem>
+        )
+      })}
+    </List>
+  )
 }
 
 export default ServiceList;
