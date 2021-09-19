@@ -32,7 +32,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "npx eslint . --ext .js,.ts",
+    "lint-fix": "npx eslint . --ext .js,.ts --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -68,6 +70,11 @@
   },
   "devDependencies": {
     "@types/jest": "^26.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.31.1",
+    "@typescript-eslint/parser": "^4.31.1",
+    "eslint": "^7.32.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-react": "^7.25.2",
     "jest": "^26.0.0",
     "ts-jest": "^26.0.0"
   }

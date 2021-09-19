@@ -1,4 +1,4 @@
-import ServiceItem from "./ServiceItem";
+import ServiceItem from './ServiceItem';
 
 export default interface Service {
     date: Date;
@@ -7,13 +7,13 @@ export default interface Service {
     bmw: boolean;
     status: string;
     items: ServiceItem[];
-};
+};;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 export const createServiceObject = (): Service => ({
-    date: new Date(),
-    mileage: 0,
-    dealer: "",
-    bmw: false,
-    status: "1",
-    items: [],
+  date: new Date(),
+  mileage: 0,
+  dealer: '',
+  bmw: false,
+  status: '1',
+  items: [],
 });
