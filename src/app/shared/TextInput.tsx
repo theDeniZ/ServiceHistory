@@ -1,4 +1,4 @@
-import React, { ChangeEvent, PropsWithChildren } from 'react';
+import React, {ChangeEvent, PropsWithChildren} from 'react';
 import TextField from '@material-ui/core/TextField';
 
 export interface TextInputProps {
@@ -6,24 +6,24 @@ export interface TextInputProps {
     onChange: (value: string) => void,
     className?: string,
 }
- 
+
 const TextInput: React.FC<PropsWithChildren<TextInputProps>> = (props) => {
-    const { value, onChange, className } = props;
+  const {value, onChange, className} = props;
 
-    const fieldChanged = (e: ChangeEvent<HTMLInputElement>) => {
-        onChange(e.target.value);
-    };
+  const fieldChanged = (e: ChangeEvent<HTMLInputElement>) => {
+    onChange(e.target.value);
+  };
 
-    return (
-        <>
-            <TextField
-                label={props.children}
-                value={value}
-                onChange={fieldChanged}
-                className={className}
-            />
-        </>
-     );
+  return (
+    <>
+      <TextField
+        label={props.children}
+        value={value}
+        onChange={fieldChanged}
+        className={className}
+      />
+    </>
+  );
 }
- 
+
 export default TextInput;

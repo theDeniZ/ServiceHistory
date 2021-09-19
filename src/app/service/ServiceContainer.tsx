@@ -1,13 +1,12 @@
-import { FunctionComponent } from "react";
-import ServiceListContainer from "./list/ServiceListContainer";
+import {FunctionComponent} from 'react';
+import ServiceListContainer from './list/ServiceListContainer';
 
 const ServiceContainer: FunctionComponent = () => {
-
-    return (
-        <>
-            <ServiceListContainer />
-        </>
-    );
+  return (
+    <>
+      <ServiceListContainer />
+    </>
+  );
 }
 
 export default ServiceContainer;
