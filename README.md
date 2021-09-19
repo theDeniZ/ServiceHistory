@@ -1,46 +1,41 @@
-# Getting Started with Create React App
+# BMW Service Manager App. 
+Allows creation and managing of the BMW Service History. 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Tested on NBT ECU only. May or may not work on CIC / NBT Evo.
 
-## Available Scripts
+## Create and manage the history file
 
-In the project directory, you can run:
+The Service History is a file with a *.tst extension (also a `Ediabas Toolset 32` Test file). You can load an existing one or create a new file.
 
-### `npm start`
+Use the Web App for this purpouse.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Write history to a car
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+In order to write created history with this application, you will need installed EDIABAS library. No other app is required, the "BMW Standart Tools" is sufficient. The connection to the car should be configured and working. It is required to have a connection to the car, while using this application.
+The Ediabas should also be configured to have all needed ECU group / SGBD files. We will need at least **g_mmi.grp** and **nbt.prg** files.
 
-### `npm test`
+Complete following steps to successfully write the history to the car:
+- Connect the PC to the Car wia some preffered connection (DCan/ICOM/…) and setup the connection wia the Ediabas if needed (Set Com port / reserve ICOM / update Ediabas.ini)
+- Open the **Ediabas Toolset 32** application (standard Ediabas tools app).
+- In menu File -> Load SGBD, Group file and select the **g_mmi.grp** file in the directory where you placed it beforehand (usually C:/Ediabas/Ecu)
+- In menu File -> Load Test and select the Service History file, created with the Service Manager Application. You will find a new window opened with the test shown. The content is read from the file and is wery similar to it. See the chapter "File parsing"
+- In menu Test -> Run test. The commands will begin sending to the car. This may require a few minutes
+- Done
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Any errors in the Ediabas Toolset 32 are Ediabas errors, which you may resolve by searching the internet. 
 
-### `npm run build`
+## File Parsing
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+If you have a Service History file, created with this app, you may find that the content of this file looks like this:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+`1|g_mmi|steuern_servicehistory_erase
+2|g_mmi|steuern_servicehistory_add||8;11;2020;0;175021;0;03181;0x1;5;1;0x1;0;0;4;0x1;0;0;11;0x1;0;0;12;0x1;0;0;100;0x1;0;0
+3|g_mmi|steuern_servicehistory_add||8;3;2019;0;151690;0;03181;0x1;2;1;0x1;0;0;4;0x1;0;0
+4|g_mmi|steuern_servicehistory_add||3;2;2019;0;130024;0;00383;0x1;1;3;0x1;0;0
+`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Each line of this file corresponds to a command, sent to a car. Each line contains the `|` symbol, separating the parts of a request.
+As you can see, each command uses "g_mmi" group file and some functions of it: "steuern_servicehistory_erase" and "steuern_servicehistory_add" which correspond to erasing the history and adding a new entry.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+The next parameters contain all required information: date, milage, dealer, bmw flag and all services.
+More can be found here: [https://bimmerguide.de/service-historie-eintrag-mit-tool32/](https://bimmerguide.de/service-historie-eintrag-mit-tool32/)
